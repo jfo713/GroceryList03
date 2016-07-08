@@ -18,7 +18,7 @@
     [super viewDidLoad];
     
     self.title = self.selectedGroceryCategory.categoryName;
-    groceryItemsArray = [NSMutableArray array];
+    // self.selectedGroceryCategory.groceryItems;
     
     // Uncomment the following line to preserve selection between presentations.
     // self.clearsSelectionOnViewWillAppear = NO;
@@ -49,7 +49,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-    return groceryItemsArray.count;
+    return self.selectedGroceryCategory.groceryItems.count;
 }
 
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
@@ -77,9 +77,7 @@
     
     NSLog(@"%@", groceryItem.itemName);
     
-    [groceryItemsArray addObject:groceryItem];
-    
-    NSLog(@"array: %@", groceryItemsArray);
+    [self.selectedGroceryCategory.groceryItems addObject:groceryItem];
     
     [self.tableView reloadData];
     
@@ -88,7 +86,7 @@
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"ItemCell" forIndexPath:indexPath];
     
-    GroceryItem *groceryItem = groceryItemsArray[indexPath.row];
+    GroceryItem *groceryItem = self.selectedGroceryCategory.groceryItems[indexPath.row];
     cell.textLabel.text = groceryItem.itemName;
     
     return cell;
@@ -109,7 +107,7 @@
         
         // Delete the row from the data source
         
-        [groceryItemsArray removeObjectAtIndex:indexPath.row];
+        [self.selectedGroceryCategory.groceryItems removeObjectAtIndex:indexPath.row];
         [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
         
     } else if (editingStyle == UITableViewCellEditingStyleInsert) {

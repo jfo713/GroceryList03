@@ -64,8 +64,7 @@
 -(void) prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     
     if([segue.identifier isEqualToString:@"AddCategorySegue"]) {
-        
-        UINavigationController *navigationController = (UINavigationController *) segue.destinationViewController;
+                UINavigationController *navigationController = (UINavigationController *) segue.destinationViewController;
         
         AddCategoryViewController *addCategoryViewController = (AddCategoryViewController *)navigationController.viewControllers.firstObject;
         
@@ -73,13 +72,19 @@
         
     }
     
-    /*else if([segue.identifier isEqualToString:@"ItemListSegue"]) {
+    else if([segue.identifier isEqualToString:@"ItemListSegue"]) {
         
-        UINavigationController *navigationController = (UINavigationController *) segue.destinationViewController;
+        ItemListTableViewController *itemListTableViewController = (ItemListTableViewController*) segue.destinationViewController;
         
-        ItemListTableViewController *itemListTableViewController = (ItemListTableViewController*) navigationController.viewControllers.firstObject;
+        // find the selected index
+        NSIndexPath *indexPath = self.tableView.indexPathForSelectedRow;
         
-        } */
+        
+        
+        GroceryCategory *groceryCategory = groceryCategoryArray[indexPath.row];
+        itemListTableViewController.selectedGroceryCategory = groceryCategory;
+        
+        }
     
 }
 

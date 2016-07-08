@@ -12,8 +12,7 @@
 #import "GroceryCategory.h"
 
 @interface ItemListTableViewController : UITableViewController {
-    
-    NSMutableArray *groceryItemsArray;
+
     
 }
 
